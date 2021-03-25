@@ -2,13 +2,18 @@
 
 export const add = (a: number, b: number) => {
     return a + b;
-    }
-
+}
+    
 export const divide = (a: number, b: number) => {
     if(b === 0) { throw new Error('div by 0') }
-
     return a / b;
-    }
+}
+
+export const concat = (a: String, b: String) => {
+    if (a === '' || b === '') { throw new Error('empty string') }
+    return a + ' ' + b;
+}
+    
 
 // @TODO try creating a method "concat" to concatenate two strings
 // it should take two string paramaters.
