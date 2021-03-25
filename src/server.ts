@@ -71,15 +71,41 @@ import { Car, cars as cars_list } from './cars';
   // @TODO Add an endpoint to GET a list of cars
   // it should be filterable by make with a query paramater
   app.get('/cars',  (req: Request, res: Response) => {
-    res.status(200).json({ cars: cars_list });
+    res.status(200).json({ cars: cars });
   })
 
   // @TODO Add an endpoint to get a specific car
   // it should require id
   // it should fail gracefully if no matching car is found
+  app.get('/cars/:id', (req: Request, res: Response) => {
+    const id = parseInt(req.params.id, 10);
+    const car = cars.find(car => car.id === id);
+    if (car) {
+      res.status(200).json({ car: car });
+    } else {
+      res.status(404).json({message: 'Car not found'})
+    }
+  })
 
   /// @TODO Add an endpoint to post a new car to our list
   // it should require id, type, model, and cost
+  app.post('/newcar', async (req: Request, res: Response) => {
+    const { make, type, cost, model } = req.body;
+    if (!make || !type || !cost || !model) {
+      res.status(400).json({ message: 'Invaild request' });
+    } else {
+      const id = cars_list.length + 1;
+      cars  = cars.concat(
+        {
+          make: make,
+          model: model,
+          type: type,
+          cost: cost,
+          id: id
+        });
+      res.status(201).json({ message: 'New car added!', cars: cars });
+    }
+  })
 
   // Start the Server
   app.listen( port, () => {
