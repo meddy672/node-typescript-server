@@ -6,7 +6,6 @@ import { Car, cars as cars_list } from './cars';
   let cars:Car[]  = cars_list;
 
   const app = express(); 
-  //default port to listen
   const port = 8082; 
   
   //use middleware so post bodies 
