@@ -5,7 +5,6 @@ import { Car, cars as cars_list } from './cars';
 (async () => {
   let cars:Car[]  = cars_list;
 
-  //Create an express applicaiton
   const app = express(); 
   //default port to listen
   const port = 8082; 
